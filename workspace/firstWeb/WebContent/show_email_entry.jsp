@@ -9,7 +9,9 @@
 <body>
 <h1>메일 리스트에 가입되었습니다. </h1>
 입력한 정보 내역입니다 : 
-
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <table>
 	<tr>
 		<td>First Name : </td>
