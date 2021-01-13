@@ -2,11 +2,52 @@ package kr.co.java.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import kr.co.java.common.DBUtil;
 import kr.co.java.dto.MemberDTO;
 
 public class MemberDAO {
+	//리스트조회
+	public List<MemberDTO> getMemberList(){
+		
+		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
+		//1. 필요한 객체 선언 
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			//3. DB접속
+			conn = DBUtil.getConnection();
+			//4. 쿼리작성
+			ps = conn.prepareStatement("select id,name,password,email,join_date from members");
+			//5. 쿼리실행
+			rs = ps.executeQuery();
+			//6. 결과값을 꺼내기!! 
+			while(rs.next()) {
+				MemberDTO member = new MemberDTO();
+				member.setId(rs.getString("id"));
+				member.setName(rs.getString(2));
+				member.setPassword(rs.getString(3));
+				member.setEmail(rs.getString(4));
+				member.setJoinDate(rs.getString(5));
+				
+				memberList.add(member);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			//2. 선언한 객체 닫기!!
+			DBUtil.close(conn, ps, rs);
+		}
+		
+		
+		
+		
+		return memberList;
+	}
 	// 입력
 	public boolean addMember(MemberDTO member) {
 		boolean resultFlag = false;
@@ -40,12 +81,17 @@ public class MemberDAO {
 
 	public static void main(String[] args) {
 		MemberDAO dao = new MemberDAO();
-		MemberDTO member = new MemberDTO();
-		member.setId("carami");
-		member.setName("강경미");
-		member.setPassword("1111");
-		member.setEmail("carami@nate.com");
+		/*
+		 * MemberDTO member = new MemberDTO(); member.setId("carami");
+		 * member.setName("강경미"); member.setPassword("1111");
+		 * member.setEmail("carami@nate.com");
+		 * 
+		 * System.out.println(dao.addMember(member));
+		 */
 		
-		System.out.println(dao.addMember(member));
+		List<MemberDTO> memberList = dao.getMemberList();
+		for (MemberDTO memberDTO : memberList) {
+			System.out.println(memberDTO);
+		}
 	}
 }

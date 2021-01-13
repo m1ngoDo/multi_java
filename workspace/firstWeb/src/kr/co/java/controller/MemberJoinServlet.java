@@ -36,6 +36,9 @@ public class MemberJoinServlet extends HttpServlet {
 		request.setAttribute("resultFlag", resultFlag);
 		RequestDispatcher rd = request.getRequestDispatcher("memberJoin.jsp");
 		rd.forward(request, response);
+		
+		
+		
 //		RequestDispatcher rd = null;
 //		if(resultFlag) {
 //			rd = request.getRequestDispatcher("memberJoinOk.jsp");
