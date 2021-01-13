@@ -10,17 +10,8 @@
 </head>
 <body>
 	<%
-		request.setCharacterEncoding("utf-8");
-
-	//데이터베이스에 저장~~ 
-	MemberDAO dao = new MemberDAO();
-	MemberDTO member = new MemberDTO();
-	member.setId(request.getParameter("id"));
-	member.setName(request.getParameter("name"));
-	member.setPassword(request.getParameter("password"));
-	member.setEmail(request.getParameter("email"));
-	
-	if(dao.addMember(member)){
+	boolean resultFlag =  (Boolean)request.getAttribute("resultFlag");
+	if(resultFlag){
 	%>
 	<h2>DB저장 성공!!!!</h2>
 	<table>
