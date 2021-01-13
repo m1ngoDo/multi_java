@@ -10,8 +10,31 @@ import kr.co.java.common.DBUtil;
 import kr.co.java.dto.MemberDTO;
 
 public class MemberDAO {
+	//멤버삭제
+	public int deleteMember(String id) {
+		int resultCount = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("delete from members where id = ?");
+			ps.setString(1, id);
+			
+			resultCount = ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, ps);
+		}
+		
+		return resultCount;
+	}
+	
+	
 	//리스트조회
 	public List<MemberDTO> getMemberList(){
+		
+		
 		
 		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
 		//1. 필요한 객체 선언 
@@ -68,7 +91,8 @@ public class MemberDAO {
 			// 5. 실행.
 			int count = ps.executeUpdate();
 			if(count == 1)
-				resultFlag = true;
+				resultFlag = true;			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -89,9 +113,11 @@ public class MemberDAO {
 		 * System.out.println(dao.addMember(member));
 		 */
 		
-		List<MemberDTO> memberList = dao.getMemberList();
-		for (MemberDTO memberDTO : memberList) {
-			System.out.println(memberDTO);
-		}
+		/*
+		 * List<MemberDTO> memberList = dao.getMemberList(); for (MemberDTO memberDTO :
+		 * memberList) { System.out.println(memberDTO); }
+		 */
+		
+		System.out.println(dao.deleteMember("carami55"));
 	}
 }

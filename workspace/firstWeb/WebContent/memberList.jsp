@@ -20,6 +20,7 @@
 		<th>비밀번호</th>
 		<th>이메일</th>
 		<th>가입일</th>
+		<th>삭제</th>
 	</tr>
 	<% if(memberList != null){
 	for(MemberDTO member:memberList){ %>
@@ -29,8 +30,8 @@
 		<td><%=member.getPassword() %></td>
 		<td><%=member.getEmail() %></td>
 		<td><%=member.getJoinDate() %></td>
-	</tr>
-	
+		<td><a href='memberDel?id=<%=member.getId() %>'>삭제</a></td>
+	</tr>	
 	<%} //end for
 	}//end if %>
 </table>
