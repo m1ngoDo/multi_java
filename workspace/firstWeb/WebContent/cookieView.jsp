@@ -17,6 +17,7 @@
 	<tr>
 		<th>쿠키이름</th>
 		<th>쿠키값</th>
+		<th>쿠키삭제</th>
 	</tr>
 	<%
 	if(cookies != null){
@@ -25,6 +26,7 @@
 		<tr>
 			<td><%=cookie.getName() %></td>
 			<td><%=cookie.getValue() %></td>
+			<td><a href="cookieDel.jsp?cookieName=<%=cookie.getName() %>">쿠키삭제</a></td>
 		</tr>
 		
 	<%}//end for
