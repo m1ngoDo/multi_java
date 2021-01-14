@@ -33,9 +33,18 @@ public class MemberJoinServlet extends HttpServlet {
 		member.setEmail(request.getParameter("email"));
 		//DB저장이 성공여부에 따라서 다른 결과를 보여주고 싶었다~~  
 		boolean resultFlag = dao.addMember(member);
-		request.setAttribute("resultFlag", resultFlag);
-		RequestDispatcher rd = request.getRequestDispatcher("memberJoin.jsp");
-		rd.forward(request, response);
+		
+		//성공했다면, list로 리다이렉트 
+		if(resultFlag) {
+			response.sendRedirect("memberList");
+		}else {
+		
+		//실패했다면, memberJoinForm.html로 리다이렉트 
+			response.sendRedirect("memberJoinForm.html");
+		}
+//		request.setAttribute("resultFlag", resultFlag);
+//		RequestDispatcher rd = request.getRequestDispatcher("memberJoin.jsp");
+//		rd.forward(request, response);
 		
 		
 		

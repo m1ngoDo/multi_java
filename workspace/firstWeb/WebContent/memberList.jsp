@@ -20,6 +20,7 @@
 		<th>비밀번호</th>
 		<th>이메일</th>
 		<th>가입일</th>
+		<th>수정</th>
 		<th>삭제</th>
 	</tr>
 	<% if(memberList != null){
@@ -30,10 +31,14 @@
 		<td><%=member.getPassword() %></td>
 		<td><%=member.getEmail() %></td>
 		<td><%=member.getJoinDate() %></td>
+		<td><a href='MemberUpdateFromServlet?id=<%=member.getId() %>'>수정</a></td>
 		<td><a href='memberDel?id=<%=member.getId() %>'>삭제</a></td>
 	</tr>	
 	<%} //end for
 	}//end if %>
 </table>
+<br>
+<br>
+<button onclick="location.href='memberJoinForm.html'">회원가입하기!! </button>
 </body>
 </html>
