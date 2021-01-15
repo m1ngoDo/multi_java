@@ -6,10 +6,10 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.java.dao.MemberDAO;
 import kr.co.java.dto.MemberDTO;
@@ -27,22 +27,22 @@ public class MemberListServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 로그인여부 확인하기!!!
-		boolean loginFlag = false;
+		boolean loginFlag = false; 
 		String id = null;
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if ("loginOk".equals(cookie.getName())) {
-					loginFlag = true;
-					id = cookie.getValue();
-					break;
-				}
-			}
+		// 로그인여부 확인하기!!!
+		/* 쿠키를 이용했을때 상태정보를 확인!!!  
+		 *  Cookie[] cookies =
+		 * request.getCookies(); if (cookies != null) { for (Cookie cookie : cookies) {
+		 * if ("loginOk".equals(cookie.getName())) { loginFlag = true; id =
+		 * cookie.getValue(); break; } } }
+		 */
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("loginOk");
+		if(member != null) {
+			loginFlag = true;
+			id = member.getId();
 		}
-
 		
-
 		if (loginFlag) {
 			// 로그인이 된 사용자라면... 리스트를 보여준다...
 
