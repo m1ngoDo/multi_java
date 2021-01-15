@@ -30,9 +30,9 @@
 <%
 	if(msg != null){
 %>
-	<div id="msg"><%=msg %></div>
+	<div id="msg" class="a test bb"><%=msg %></div>
 <%} %>
-<form action="login" method="post">
+<form action="login" method="post" class="a">
 	아이디 : <input type="text" name="id"><br>
 	비밀번호 : <input type="password" name="password"><br>
 	<input type="submit" value="로그인"><input type="reset" value="취소">

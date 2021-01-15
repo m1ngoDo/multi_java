@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.java.dao.MemberDAO;
 import kr.co.java.dto.MemberDTO;
@@ -29,7 +30,14 @@ public class LoginSerlvet extends HttpServlet {
 		if(member == null) {
 			//3-3. 해당하는 아이디가 존재하지 않을 경우.. 
 			// 회원가입폼으로 리다이렉트 한다.
-			response.sendRedirect("memberJoinForm.html");
+			//없는 아이디라서 회원가입을 하라는 메시지를 보여주고 싶다..   (상태정보가 유지!! - 세션을 이용한다.) 
+			//Session객체 얻어오기!!!  
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("msg", id+"는 존재하지 않는 아이디입니다. 회원가입하고 이용하세요^^");		
+			
+			
+			response.sendRedirect("memberJoinForm.jsp");
 		}else if(member != null && member.getPassword().equals(password)) {
 		//3-1. 사용자가 입력한 정보와 동일한 정보가 있다면..  로그인 해준다. 
 		//쿠키를 생성해서 응답에 보내준다. 
