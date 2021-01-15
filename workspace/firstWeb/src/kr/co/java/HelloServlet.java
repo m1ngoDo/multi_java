@@ -12,8 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/hi")
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+    public HelloServlet() {
+    	System.out.println("HelloServlet 생성자 실행");
+    }
+	@Override
+	public void destroy() {
+		System.out.println("HelloServlet destroy 실행");
+	}
+
+	@Override
+	public void init() throws ServletException {
+		System.out.println("HelloServlet init 실행");
+	}
+
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("HelloServlet service 실행");
+		
 		System.out.println(request.getParameter("name"));
 		System.out.println("짹짹!!");
 		response.setContentType("text/html;charset=utf-8");
