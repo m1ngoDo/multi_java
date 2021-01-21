@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan(
-		basePackages = "test.dao",
+		annotationClass = Mapper.class,
+		basePackages = "exam.spring.board.dao",
 		sqlSessionFactoryRef = "sqlSessionFactoryBean"
 		)
 public class MyBatisConfig {
@@ -21,8 +23,8 @@ public class MyBatisConfig {
 	(DataSource dataSource, ApplicationContext applicationContext) throws IOException {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean.setConfigLocation(applicationContext.getResource(""));
-		factoryBean.setMapperLocations(applicationContext.getResources(""));
+		factoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis/configuration.xml"));
+		factoryBean.setMapperLocations(applicationContext.getResources("classpath:mybatis/mappers/**/*.xml"));
 		return factoryBean;
 		
 	}
