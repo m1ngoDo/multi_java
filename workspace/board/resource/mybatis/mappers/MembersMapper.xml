@@ -11,4 +11,10 @@
 	<select id="getMember" resultType="exam.spring.board.dto.Member">
 		select id,name,password,email,join_date from members where id = #{id}
 	</select>
+	<insert id="addMember" parameterType="exam.spring.board.dto.Member">
+		insert into members (id,name,password,email,join_date) values(#{id},#{name},#{password},#{email},sysdate)
+	</insert>
+	<select id="getMembers" resultType="exam.spring.board.dto.Member">
+		select id,name,password,email,join_date from members order by join_date desc 
+	</select>
 </mapper>

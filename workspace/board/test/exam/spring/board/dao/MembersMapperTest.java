@@ -1,5 +1,7 @@
 package exam.spring.board.dao;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,5 +25,24 @@ public class MembersMapperTest {
 		Member member = membersMapper.getMember("carami");
 		Assert.assertNotNull(member);
 		System.out.println(member);
+	}
+	
+	@Test
+	public void addMember()throws Exception{
+		Member testMember = new Member();
+		testMember.setId("test");
+		testMember.setName("테스트");
+		testMember.setPassword("test");
+		testMember.setEmail("test@test.com");
+		
+		membersMapper.addMember(testMember);
+		
+		Assert.assertNotNull(membersMapper.getMember("test"));
+	}
+	
+	@Test
+	public void getMembers() throws Exception{
+		List<Member> memberList = membersMapper.getMembers();
+		Assert.assertEquals(7, memberList.size());
 	}
 }
