@@ -8,6 +8,6 @@ import exam.spring.board.dto.Member;
 @Mapper
 public interface MembersMapper {
 	public Member getMember(String id);
-	public void addMember(Member member);
+	public int addMember(Member member);
 	public List<Member> getMembers();
 }

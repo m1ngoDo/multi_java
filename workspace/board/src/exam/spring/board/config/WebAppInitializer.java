@@ -1,5 +1,9 @@
 package exam.spring.board.config;
 
+import javax.servlet.Filter;
+
+import org.apache.catalina.filters.FailedRequestFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -20,6 +24,14 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	protected String[] getServletMappings() {
 		// TODO Auto-generated method stub
 		return new String[] {"/"};
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+		encodingFilter.setEncoding("utf-8");
+		
+		return new Filter[] {encodingFilter};
 	}
 	
 }
