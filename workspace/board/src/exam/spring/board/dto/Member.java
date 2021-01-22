@@ -1,11 +1,13 @@
 package exam.spring.board.dto;
 
+import java.util.Date;
+
 public class Member {
 	private String id;
 	private String name;
 	private String password;
 	private String email;
-	private String joinDate;
+	private Date joinDate;
 	public String getId() {
 		return id;
 	}
@@ -30,10 +32,12 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getJoinDate() {
+	
+	
+	public Date getJoinDate() {
 		return joinDate;
 	}
-	public void setJoinDate(String joinDate) {
+	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
 	@Override
@@ -41,5 +45,6 @@ public class Member {
 		return "Member [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", joinDate="
 				+ joinDate + "]";
 	}
+	
 	
 }

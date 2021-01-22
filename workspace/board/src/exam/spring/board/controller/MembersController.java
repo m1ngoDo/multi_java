@@ -1,11 +1,11 @@
 package exam.spring.board.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +23,7 @@ public class MembersController {
 		return "member/joinForm";
 	}
 	@PostMapping("/join")
-	public String memberJoin(Member member) {
+	public String memberJoin(@ModelAttribute Member member) {
 		System.out.println(member);
 		memberService.memberJoin(member);
 		return "redirect:/hello";
@@ -32,5 +32,11 @@ public class MembersController {
 	public String getMembers(ModelMap model) {
 		model.addAttribute("list",memberService.getMembers());
 		return "member/list";
+	}
+	@GetMapping("/{id}")
+	public String getMember(@PathVariable(name="id") String id, ModelMap model) {
+		Member member = memberService.getMember(id);
+		model.addAttribute("member", member);
+		return "member/view";
 	}
 }

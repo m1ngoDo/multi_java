@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.spring.board.dao.BoardMapper">
+<resultMap type="exam.spring.board.dto.Board" id="board_resultMap">
+	<result column="member_id" property="memberId"/>
+	<result column="read_count" property="readCount"/>
+	<result column="write_date" property="writeDate"/>
+	<result column="update_date" property="updateDate"/>
+</resultMap>
+<select id="getBoard" resultMap="board_resultMap">
+	select id,member_id,title,content,read_count,write_date,update_date
+	from board where id = #{id}
+</select>
+
+</mapper>
