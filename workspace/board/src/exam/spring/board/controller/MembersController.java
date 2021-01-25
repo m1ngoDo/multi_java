@@ -1,5 +1,8 @@
 package exam.spring.board.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import exam.spring.board.dto.Member;
 import exam.spring.board.service.MemberService;
@@ -23,9 +27,11 @@ public class MembersController {
 		return "member/joinForm";
 	}
 	@PostMapping("/join")
-	public String memberJoin(@ModelAttribute Member member) {
+	public String memberJoin(@ModelAttribute Member member,HttpServletRequest request) {
 		System.out.println(member);
-		memberService.memberJoin(member);
+
+			memberService.memberJoin(member);
+
 		return "redirect:/hello";
 	}
 	@GetMapping
@@ -39,4 +45,5 @@ public class MembersController {
 		model.addAttribute("member", member);
 		return "member/view";
 	}
+	
 }

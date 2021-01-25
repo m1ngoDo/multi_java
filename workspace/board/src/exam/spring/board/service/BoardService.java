@@ -14,4 +14,8 @@ public class BoardService {
 	public Board getBoard(Integer id) {
 		return boardMapper.getBoard(id);
 	}
+	
+	public int addBoard(Board board) {
+		return boardMapper.addBoard(board);
+	}
 }

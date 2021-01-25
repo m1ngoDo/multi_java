@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exam.spring.board.dao.BoardMapper">
-<resultMap type="exam.spring.board.dto.Board" id="board_resultMap">
-	<result column="member_id" property="memberId"/>
-	<result column="read_count" property="readCount"/>
-	<result column="write_date" property="writeDate"/>
-	<result column="update_date" property="updateDate"/>
-</resultMap>
-<select id="getBoard" resultMap="board_resultMap">
-	select id,member_id,title,content,read_count,write_date,update_date
-	from board where id = #{id}
-</select>
+	<resultMap type="exam.spring.board.dto.Board"
+		id="board_resultMap">
+		<result column="member_id" property="memberId" />
+		<result column="read_count" property="readCount" />
+		<result column="write_date" property="writeDate" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+	<select id="getBoard" resultMap="board_resultMap">
+		select id,member_id,title,content,read_count,write_date,update_date
+		from board where id = #{id}
+	</select>
+	<delete id="deleteBoard" parameterType="java.lang.Long">
+		delete from board where id = #{id}
+	</delete>
 
+	<insert id="addBoard"
+		parameterType="exam.spring.board.dto.Board">
+		insert into board (id,member_id, title, content, read_count, write_date,
+		update_date) values(board_seq.nextval,#{memberId}, #{title},
+		#{content}, 0, sysdate,sysdate)
+	</insert>
+
+	<insert id="updateBoard"
+		parameterType="exam.spring.board.dto.Board">
+		update board
+		set title = #{title}, content = #{content}, update_date = sysdate
+		where id = #{id}
+	</insert>
 </mapper>
